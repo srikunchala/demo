@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>  Student Data Analysis</title>
+<!--  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script> -->
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	$(function() {
+
+		var processed_json = new Array();
+		var processed_json1 = new Array();
+		$
+				.getJSON(
+						'/studchartjson/',
+						function(data) {
+
+							//xaxis  name 
+
+							for (i = 0; i < data.student_data.length; i++) {
+								//alert([data.student_data[i].name, parseInt(data.student_data[i].data)]);
+								//alert( data.student_data[i].name);
+								processed_json1.push(data.student_data[i].name,
+										parseInt(data.student_data[i].data));
+							}
+
+							// Populate series dataaa
+							for (i = 0; i < data.student_data.length; i++) {
+								//	alert( data.student_data[i].data);
+								for (j = 0; j < data.student_data[i].data.length; j++) {
+									//alert( data.student_data[i].data[j]);
+									processed_json
+											.push(data.student_data[i].data[j]);
+								}
+
+							}
+
+					 		// draw chart
+							$('#container')
+									.highcharts(
+											{
+												chart : {
+													//type: 'line'
+													//  type: 'bar'
+													type : 'column'
+												},
+												title : {
+													text : 'Student data Analysis'
+												},
+												xAxis : {
+													type : 'category',
+													categories : [ "Jan",
+															"Feb", "Mar",
+															"Apr", "May",
+															"Jun", "Jul",
+															"Aug", "Sep",
+															"Oct", "Nov", "Dec" ]
+												},
+												yAxis : {
+													title : {
+													// text : processed_json1
+													}
+												},
+
+												legend : {
+													enabled : false
+												},
+												plotOptions : {
+													  series: {
+												            borderWidth: 0,
+												            dataLabels: {
+												                enabled: true,
+												                format: '{point.y:.1f}%'
+												            }
+												        }
+												    },
+													 
+												
+												tooltip : {
+													headerFormat : '<span style="font-size:11px">{series.name}</span><br>',
+													pointFormat : '<span style="color:{point.color}">Total Marks {point.name}</span>: <b>{point.y:.2f}%</b> 	<br/>'
+												},
+
+												series : [
+														{
+															name : 'Srinivas',
+															   colorByPoint: true,
+															data : [ 49, 20,
+																	29, 23, 19,
+																	10 ],
+															drilldown : 'Srinivas'
+														},
+														{
+															name : 'Akilesh',
+															data : [ 39, 30,
+																	29, 43, 69,
+																	10 ],
+
+															drilldown : 'Akilesh'
+														},
+														{
+															name : 'Nikilesh',
+															data : [ 19, 10,
+																	49, 23, 29,
+																	20 ],
+															drilldown : 'Nikilesh'
+														} ],
+												drilldown : {
+													series : [
+															{
+																name : 'Srinivas',
+																id : 'Srinivas',
+																data : [
+																		[
+																				'Maths',
+																				24.13 ],
+																		[
+																				'Physics',
+																				17.2 ],
+																		[
+																				'Chemistry',
+																				8.11 ] ]
+															},
+															{
+																name : 'Akilesh',
+																id : 'Akilesh',
+																data : [
+																		[
+																				'Maths',
+																				14.13 ],
+																		[
+																				'Physics',
+																				12.2 ],
+																		[
+																				'Chemistry',
+																				18.11 ] ]
+															},
+															{
+																name : 'Nikilesh',
+																id : 'Nikilesh',
+																data : [
+																		[
+																				'Maths',
+																				34.13 ],
+																		[
+																				'Physics',
+																				27.2 ],
+																		[
+																				'Chemistry',
+																				6.11 ] ]
+															}
+
+													]
+												}
+
+											});
+						});
+	});
+</script>
+<script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+	<div id="container" style="height: 400px"></div>
+</body>
+</html>

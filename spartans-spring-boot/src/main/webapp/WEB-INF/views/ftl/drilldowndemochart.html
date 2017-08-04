@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+
+<!--   
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+ -->
+
+
+<style type="text/css">
+</style>
+
+<title>Highcharts Demo</title>
+
+
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+</head>
+
+<body>
+	<div id="container"
+		style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+
+	<script type='text/javascript'> 
+$(function() {
+$.getJSON(
+		'/studchartjson/',
+		function(data) {
+
+// Create the chart
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Browser market shares. January, 2015 to May, 2015'
+    },
+    subtitle: {
+        text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+    },
+    
+	 xAxis: {
+		type: 'category',
+	        ///categories: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+			//	 			"Aug", "Sep", "Oct", "Nov", "Dec" ]
+	    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true
+               // format: '{point.y:.1f}%'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+	series : [{
+		name: 'IIT',
+		colorByPoint: true,
+		data:[{
+					name : 'Jan',
+					y : [ 49 ],
+					drilldown : 'Jan'
+				},
+				{
+					name : 'Feb',
+					y : [ 39  ],
+
+					drilldown : 'Feb'
+				},
+				{
+					name : 'Mar',
+					y : [ 19 ],
+					drilldown : 'Mar'
+				}]
+				}],
+ 
+		drilldown : {
+			series : [
+					{
+						name : 'Jan',
+						id : 'Jan',
+						data : [
+								[
+										'Maths',
+										24.13 ],
+								[
+										'Physics',
+										17.2 ],
+								[
+										'Chemistry',
+										8.11 ] ]
+					},
+					{
+						name : 'Feb',
+						id : 'Feb',
+						data : [
+								[
+										'Maths',
+										14.13 ],
+								[
+										'Physics',
+										12.2 ],
+								[
+										'Chemistry',
+										18.11 ] ]
+					},
+					{
+						name : 'Mar',
+						id : 'Mar',
+						data : [
+								[
+										'Maths',
+										34.13 ],
+								[
+										'Physics',
+										27.2 ],
+								[
+										'Chemistry',
+										6.11 ] ]
+					}
+
+			]
+		}
+
+	});
+});
+});
+ 
+
+</script>
+
+	<script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+
+</body>
+
+</html>
+

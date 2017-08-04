@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+<!--  MENU LINKS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+<link rel="stylesheet" href="/css/main.css" type="text/css">
+<!--     <link rel="stylesheet" href="/css/style.css" type="text/css" /> -->
+    <style>
+    img {
+    height: 79px;
+    width: 1279px;
+    vertical-align: middle;
+}
+    /* Styles go here */
+.grid {
+  width: 1050px;
+  height: 325px;
+}
+
+.ui-grid-row .ui-grid-cell.ui-grid-row-header-cell {
+ background-color:white;
+   border-bottom: solid 1px #d4d4d4; 
+  }
+.ui-grid-cell-contents {
+    text-align: center;
+    }
+
+.ui-grid-selection-row-header-buttons {
+ cursor: pointer;
+  opacity: 1;
+
+}
+.container-fluid {
+	color: white;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.navbar-brand {
+	color: white;
+	float: left;
+	height: 50px;
+	padding: 15px 15px;
+	font-size: 16px;
+	line-height: 13px;
+}
+
+.navbar-default {
+	color: white;
+	background-color: #293a48;
+	border-color: #293a48;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #0e8084
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: white
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    color: #555;
+    background-color: #293a48;
+}
+
+    </style>
+  </head>
+
+  <body ng-controller="MainCtrl">
+  
+   <br>
+  <br>
+ 
+  <div class="col-md-12" id="Banner"  >
+   <span   ><img src="../static/images/BANNER.png"></span>
+  </div>
+  <br><br>
+    <br><br>
+	<div class="container-fluid">
+ 
+
+		<nav class="navbar navbar-default">
+
+			<div class="col-sm-8">
+
+
+				<!-- <div class="col-sm-4">
+					<a class="navbar-brand" href="#" style="color: #0e8084;">SPARTANS
+						ACADEMY</a>
+				</div> -->
+				<div>
+					<ul class="nav navbar-nav">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">ADMINISTRATION</a></li>
+						<!-- <li><a href="#">ADMISSIONS</a></li> -->
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">EXAMINATIONS <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">NEET</a></li>
+								<li><a href="#">IIT/JEE</a></li>
+								<li><a href="#">EAMCET</a></li>
+							</ul></li>
+							<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">PREVIOUS PAPERS<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">NEET</a></li>
+								<li><a href="#">IIT/JEE</a></li>
+								<li><a href="#">EAMCET</a></li>
+							</ul></li>
+						<li><a href="#">RESULTS</a></li>
+						<li><a href="#">ABOUT US</a></li>
+						<li><a href="#">CONTACT US</a></li>
+
+					</ul>
+
+				</div>
+
+
+			</div>
+			<!-- 	<div class="col-sm-2">
+			
+			</div> -->
+
+			<div class="col-sm-4">
+
+ 	<p style="color:white; font-size: 14px" class="admin-message-text text-center" th:utext="${userName}"></p>
+			</div>
+			<div align="center" th:if="${param.error}">
+				<span class="help-block">Email or Password invalid, please
+					verify</span>
+
+			</div>
+		</nav>
+	</div>
+
+<!-- Endo fo menu code -->
+  
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br>
+    
+
+    <div>
+      <br />
+      <br />
+      <div id="grid1" ui-grid="gridOptions" ui-grid-pagination="" ui-grid-selection="" class="grid"></div>
+      <script src="../static/js/custom/grid.js"></script>
+    </div>
+  </body>
+
+</html>
