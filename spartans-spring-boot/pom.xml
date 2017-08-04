@@ -31,11 +31,21 @@
     <artifactId>spring-context-support</artifactId>
 </dependency>
 
-		<dependency>
+	<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-thymeleaf</artifactId>
+	<exclusions>
+		<exclusion>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</exclusion>
+	</exclusions>
+</dependency>
 
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-jetty</artifactId>
+</dependency>
 		<!-- hot swapping, disable cache for template, enable live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -135,6 +145,31 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.6.v20141205</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>5.0.2</version>
+					</dependency>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm-commons</artifactId>
+						<version>5.0.2</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/kwe</contextPath>
+					</webApp>
+					<jettyXml>jetty.xml</jettyXml>
+					<!-- <httpConnector> <port>9999</port> </httpConnector> -->
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
